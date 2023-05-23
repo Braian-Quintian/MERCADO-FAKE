@@ -57,28 +57,28 @@ searchButton.addEventListener('click', async function () {
 });
 
 function createRatingStars(rating) {
-  const ratingDiv = document.createElement('div');
+    const ratingDiv = document.createElement('div');
 
-  // Rellenar las estrellas completas
-  for (let i = 0; i < Math.floor(rating); i++) {
-    const star = document.createElement('span');
-    star.textContent = '★'; // Estrella completa
-    ratingDiv.appendChild(star);
-  }
+    // Rellenar las estrellas completas
+    for (let i = 0; i < Math.floor(rating); i++) {
+        const star = document.createElement('span');
+        star.textContent = '★'; // Estrella completa
+        ratingDiv.appendChild(star);
+    }
 
-  // Agregar media estrella si el rating tiene decimal mayor a 0
-  if (rating % 1 !== 0) {
-    const halfStar = document.createElement('span');
-    halfStar.textContent = '½'; // Media estrella
-    ratingDiv.appendChild(halfStar);
-  }
+    // Agregar media estrella si el rating tiene decimal mayor a 0
+    if (rating % 1 !== 0) {
+        const halfStar = document.createElement('span');
+        halfStar.textContent = '½'; // Media estrella
+        ratingDiv.appendChild(halfStar);
+    }
 
-  // Agregar estrellas vacías para completar 5 estrellas en total
-  for (let i = Math.ceil(rating); i < 5; i++) {
-    const emptyStar = document.createElement('span');
-    emptyStar.textContent = '☆'; // Estrella vacía
-    ratingDiv.appendChild(emptyStar);
-  }
+    // Agregar estrellas vacías para completar 5 estrellas en total
+    for (let i = Math.ceil(rating); i < 5; i++) {
+        const emptyStar = document.createElement('span');
+        emptyStar.textContent = '☆'; // Estrella vacía
+        ratingDiv.appendChild(emptyStar);
+    }
 
-  return ratingDiv;
+    return ratingDiv;
 }

@@ -6,3 +6,30 @@
 .product {
     margin-bottom: 10px;
 }
+
+/* Estilos para los divs de productos */
+.product {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para la imagen del producto */
+.product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+/* Estilos para el título del producto */
+.product p.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Estilos para el precio del producto */
+.product p.price {
+    color: green;
+    font-weight: bold;
+}

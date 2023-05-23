@@ -2,16 +2,17 @@ const resultDiv = document.getElementById('resultDiv');
 
 (async function () {
     const searchValue = localStorage.getItem('searchValue');
-
-    if (searchValue) {
-        const url = `https://amazon23.p.rapidapi.com/product-search?query=${searchValue}&country=US`;
+    let capitalizedSearchValue = ''; // Variable inicializada con un valor vacío
+    if (searchValue !== null) {
+        capitalizedSearchValue = searchValue.charAt(0).toUpperCase() + searchValue.slice(1).toLowerCase();
+        const url = `https://amazon23.p.rapidapi.com/product-search?query=${capitalizedSearchValue}&country=US`;
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'eb035deb6fmsh3819ce686166826p13ac95jsn020f0b6bf18f',
+                'X-RapidAPI-Key': 'c14cddfe9cmsh28ddb67bf9544a6p1a7da5jsnce1a65e84a26',
                 'X-RapidAPI-Host': 'amazon23.p.rapidapi.com'
             }
-        };
+        };  
 
         try {
             const response = await fetch(url, options);
@@ -61,6 +62,8 @@ const resultDiv = document.getElementById('resultDiv');
             console.error(error);
         }
     }
+    document.title = `${capitalizedSearchValue} | Mercado Libre Colombia`;
+    document.getElementById('busqueda').textContent = capitalizedSearchValue;
     localStorage.removeItem('searchValue');
 })();
 

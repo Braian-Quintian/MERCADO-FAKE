@@ -57,6 +57,7 @@ main {
 
 .product .text {
     flex-grow: 1;
+    padding-left: 30px;
 }
 
 .product .title {
@@ -69,11 +70,23 @@ main {
     font-size: 24px;
     font-weight: 400;
     line-height: 1.25;
+    margin-top: 5px;
+    margin: 5px;
+}
+
+.beforeprice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 15px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin: 5px;
 }
 
 .product .star {
     color: #3483fa !important;
     margin-top: 5px;
+    margin: 5px;
 }
 
 .navbar {
@@ -131,3 +144,7 @@ main {
     margin: auto;
     /* Ajusta el margen derecho según tus necesidades */
 }
+#productImage:hover {
+    cursor: pointer;
+  }
+  

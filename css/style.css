@@ -1,35 +1,86 @@
-#resultDiv {
-    display: flex;
-    flex-direction: row;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Proxima Nova", -apple-system, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+}
+body {
+    background-color: #ededed;
+}
+main {
+    width: auto !important;
+    margin: 10px;
 }
 
-.product {
-    margin-bottom: 10px;
+.contenedor {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 5px;
+    margin: 5px;
 }
 
-/* Estilos para los divs de productos */
-.product {
-    background-color: white;
+.informacion {
+    background-color: lightgray;
+    width: 292px;
+    margin: 5px;
     padding: 10px;
-    margin-bottom: 10px;
 }
 
-/* Estilos para la imagen del producto */
+.container {
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 800px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-container input[type="search"] {
+    margin-right: 10px;
+}
+
+.product {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
+    height: 150px;
+    margin: 10px;
+    background-color: white !important;
+    border-bottom: lightgray solid 0.1rem;
+}
+
 .product img {
     width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 5px;
+    height: 150px;
+    object-fit: contain;
+    margin-right: 10px;
 }
 
-/* Estilos para el título del producto */
-.product p.title {
-    font-weight: bold;
-    margin-bottom: 5px;
+.product .text {
+    flex-grow: 1;
 }
 
-/* Estilos para el precio del producto */
-.product p.price {
-    color: green;
+.product .title {
     font-weight: bold;
+}
+
+.product .price {
+    color: rgb(51, 51, 51);
+    font-size: 20px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.product .star {
+    color: #3483fa !important;
+    margin-top: 5px;
 }

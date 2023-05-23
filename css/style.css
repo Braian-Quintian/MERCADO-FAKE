@@ -1,0 +1,8 @@
+#resultDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.product {
+    margin-bottom: 10px;
+}

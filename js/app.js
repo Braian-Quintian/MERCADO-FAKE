@@ -31,6 +31,8 @@ searchButton.addEventListener('click', async function () {
 
             // Crear elementos HTML para mostrar la información
             const productDiv = document.createElement('div');
+            productDiv.classList.add('product'); // Agregar la clase 'product' al div del producto
+
             const thumbnailImg = document.createElement('img');
             const titleP = document.createElement('p');
             const priceP = document.createElement('p');

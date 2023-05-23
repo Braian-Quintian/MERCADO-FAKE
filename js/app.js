@@ -18,35 +18,33 @@ searchButton.addEventListener('click', async function () {
         console.log(result);
 
         // Limpiar el contenido previo del div
-        // resultDiv.innerHTML = ''; SE COMENTA POR EL MOMENTO EN QUE SE HACEN LAS PRUEBAS
+        resultDiv.innerHTML = '';
 
         // Obtener los primeros 15 productos o menos si hay menos de 15
         const productsToShow = result.result.slice(0, 15);
 
         // Recorrer los productos obtenidos
         productsToShow.forEach(product => {
-            const thumbnail = product.thumbnail;
-            const title = product.title;
-            const currency = product.price.currency;
-            const price = product.price.current_price;
-            const rating = product.reviews.rating;
+            const { thumbnail, title, price, reviews } = product;
+            const { currency, current_price } = price;
+            const { rating } = reviews;
 
             // Crear elementos HTML para mostrar la información
             const productDiv = document.createElement('div');
             const thumbnailImg = document.createElement('img');
             const titleP = document.createElement('p');
             const priceP = document.createElement('p');
-            const ratingDiv = createRatingStars(rating); // Utilizar la función para generar las estrellitas
+            const ratingDiv = createRatingStars(rating);
+            productDiv.appendChild(ratingDiv);
 
             thumbnailImg.src = thumbnail;
             titleP.textContent = title;
-            priceP.textContent = `${currency} ${price}`;
+            priceP.textContent = `${currency} ${current_price}`;
 
             // Agregar los elementos al div del producto
             productDiv.appendChild(thumbnailImg);
             productDiv.appendChild(titleP);
             productDiv.appendChild(priceP);
-            productDiv.appendChild(ratingDiv); // Agregar el div de las estrellitas
 
             // Agregar el div del producto al div principal de resultados
             resultDiv.appendChild(productDiv);
@@ -57,28 +55,27 @@ searchButton.addEventListener('click', async function () {
 });
 
 function createRatingStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
     const ratingDiv = document.createElement('div');
-
-    // Rellenar las estrellas completas
-    for (let i = 0; i < Math.floor(rating); i++) {
-        const star = document.createElement('span');
-        star.textContent = '★'; // Estrella completa
-        ratingDiv.appendChild(star);
+    // Agregar estrellas completas
+    for (let i = 0; i < fullStars; i++) {
+        const starIcon = document.createElement('i');
+        starIcon.classList.add('fas', 'fa-star');
+        ratingDiv.appendChild(starIcon);
     }
-
-    // Agregar media estrella si el rating tiene decimal mayor a 0
-    if (rating % 1 !== 0) {
-        const halfStar = document.createElement('span');
-        halfStar.textContent = '½'; // Media estrella
-        ratingDiv.appendChild(halfStar);
+    // Agregar media estrella si hay medio punto
+    if (hasHalfStar) {
+        const halfStarIcon = document.createElement('i');
+        halfStarIcon.classList.add('fas', 'fa-star-half-alt');
+        ratingDiv.appendChild(halfStarIcon);
     }
-
-    // Agregar estrellas vacías para completar 5 estrellas en total
-    for (let i = Math.ceil(rating); i < 5; i++) {
-        const emptyStar = document.createElement('span');
-        emptyStar.textContent = '☆'; // Estrella vacía
-        ratingDiv.appendChild(emptyStar);
+    // Agregar estrellas vacías restantes hasta completar 5
+    const remainingStars = 5 - Math.ceil(rating);
+    for (let i = 0; i < remainingStars; i++) {
+        const emptyStarIcon = document.createElement('i');
+        emptyStarIcon.classList.add('far', 'fa-star');
+        ratingDiv.appendChild(emptyStarIcon);
     }
-
     return ratingDiv;
 }

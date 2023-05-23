@@ -4,11 +4,11 @@ const resultDiv = document.getElementById('resultDiv');
     const searchValue = localStorage.getItem('searchValue');
 
     if (searchValue) {
-        const url = `https://amazon23.p.rapidapi.com/product-search?query=${encodeURIComponent(searchValue)}&country=US`;
+        const url = `https://amazon23.p.rapidapi.com/product-search?query=${searchValue}&country=US`;
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'ef83921e6bmsh953b269570e564dp16eac6jsn64d0c9daeb77',
+                'X-RapidAPI-Key': 'eb035deb6fmsh3819ce686166826p13ac95jsn020f0b6bf18f',
                 'X-RapidAPI-Host': 'amazon23.p.rapidapi.com'
             }
         };
@@ -22,29 +22,40 @@ const resultDiv = document.getElementById('resultDiv');
             resultDiv.innerHTML = '';
 
             // Obtener los primeros 15 productos o menos si hay menos de 15
-            const productsToShow = result.result.slice(0, 50);
+            const productsToShow = result.result.slice(0, 15);
 
             // Recorrer los productos obtenidos
             productsToShow.forEach(product => {
-                const { thumbnail, title, price, reviews } = product;
-                const { rating } = reviews;
 
+                const { thumbnail, title, price, reviews, asin } = product;
+                const { rating } = reviews;
+                const { current_price, before_price, discounted } = price;
+
+                console.log(thumbnail, title, current_price, before_price, rating, discounted, asin);
                 // Crear elementos HTML para mostrar la información
                 const productDiv = createProductDiv();
                 const thumbnailImg = createThumbnailImg(thumbnail);
                 const textDiv = createTextDiv();
                 const titleP = createTitleParagraph(title);
-                const priceP = createPriceParagraph(price);
+                const priceP = createPriceParagraph(current_price);
+                const priceBeforeP = createPriceBeforeParagraph(before_price, discounted);
                 const ratingDiv = createRatingStars(rating);
+
+                // Agregar el asin como atributo personalizado al productDiv
+                productDiv.setAttribute('data-asin', asin);
+                thumbnailImg.setAttribute('data-asin', asin);
+                thumbnailImg.setAttribute('onclick', 'handleThumbnailClick(event)');
 
                 // Estructurar los elementos creados
                 productDiv.appendChild(thumbnailImg);
                 textDiv.appendChild(titleP);
                 textDiv.appendChild(priceP);
+                if (priceBeforeP) {
+                    textDiv.appendChild(priceBeforeP);
+                }
                 textDiv.appendChild(ratingDiv);
                 productDiv.appendChild(textDiv);
                 resultDiv.appendChild(productDiv);
-
             });
         } catch (error) {
             console.error(error);
@@ -61,6 +72,7 @@ function createProductDiv() {
 
 function createThumbnailImg(src) {
     const thumbnailImg = document.createElement('img');
+    thumbnailImg.id = 'productImage';
     thumbnailImg.src = src;
     return thumbnailImg;
 }
@@ -79,11 +91,22 @@ function createTitleParagraph(text) {
 }
 
 function createPriceParagraph(price) {
-    const formattedPrice = formatPrice(price);
+    const formattedPrice = formatPrice({ current_price: price });
     const priceP = document.createElement('p');
     priceP.classList.add('price');
-    priceP.textContent = formattedPrice;
+    priceP.textContent = formattedPrice.current_price;
     return priceP;
+}
+
+function createPriceBeforeParagraph(beforeprice, discounted) {
+    if (!discounted) {
+        return null;
+    }
+    const formattedPrice = formatPrice({ before_price: beforeprice });
+    const priceBeforeP = document.createElement('p');
+    priceBeforeP.classList.add('beforeprice');
+    priceBeforeP.textContent = formattedPrice.before_price;
+    return priceBeforeP;
 }
 
 function createRatingStars(rating) {
@@ -115,13 +138,19 @@ function createRatingStars(rating) {
 }
 
 function formatPrice(price) {
-    const current_price = price.current_price;
-    if (current_price) {
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        });
-        return formatter.format(current_price);
-    }
-    return 'Price not available';
+    const current_price = price?.current_price;
+    const before_price = price?.before_price;
+
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+
+    const formattedCurrentPrice = current_price ? formatter.format(current_price) : 'Current price not available';
+    const formattedBeforePrice = before_price ? formatter.format(before_price) : 'Previous price not available';
+
+    return {
+        current_price: formattedCurrentPrice,
+        before_price: formattedBeforePrice
+    };
 }

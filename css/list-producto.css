@@ -8,10 +8,87 @@ body {
     background-color: #ededed;
 }
 
+.main {
+    text-align: center;
+    width: 80%;
+    background-color: #3483fa;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 5px;
+    margin: 5px;
+    justify-content: center;
+}
+
+.informacion {
+    background-color: lightgray;
+    width: 292px;
+    margin: 5px;
+    padding: 10px;
+}
+
 .container {
-    height: 500px;
-    margin: 0 auto;
-    background-color: blue;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 800px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
+    height: 150px;
+    margin: 10px;
+    background-color: white !important;
+    border-bottom: lightgray solid 0.1rem;
+}
+
+.product img {
+    width: 100px;
+    height: 150px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.product .text {
+    flex-grow: 1;
+    padding-left: 30px;
+}
+
+.product .title {
+    font-weight: bold;
+}
+
+.product .price {
+    color: rgb(51, 51, 51);
+    font-size: 20px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-top: 5px;
+    margin: 5px;
+}
+
+.beforeprice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 15px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin: 5px;
+}
+
+.product .star {
+    color: #3483fa !important;
+    margin-top: 5px;
+    margin: 5px;
 }
 
 .navbar {
@@ -31,11 +108,16 @@ body {
     /* Opcional: ajusta la alineación vertical según tus necesidades */
 }
 
+.search-container {
+    margin-left: 10px;
+    /* Opcional: ajusta el margen entre el input de búsqueda y el logo según tus necesidades */
+}
+
 .nav-logo {
     width: auto;
     height: auto;
     object-fit: contain;
-    margin: 20px;
+    margin: 20px 20px 20px 20px;
 }
 
 .promocion-disney {
@@ -59,7 +141,6 @@ body {
     height: 40px;
     font-size: large;
 }
-
 .search-container button[type="submit"] {
     padding: 6px 10px;
     background-color: #ffffff;
@@ -72,26 +153,24 @@ body {
     display: flex;
     align-items: center;
 }
-
 .search-container img {
     margin-left: 10px;
     height: 20px;
 }
 
-.search-container button[type="submit"]:before {
+.search-container button[type="submit"]:before{
     content: "";
     display: block;
     height: 26px;
     border-left: 1px solid #e6e6e6;
     position: absolute;
     top: auto;
+    
 }
-
 .search-container input[type="search"]:focus {
     outline: none;
     /* Puedes agregar cualquier estilo adicional que desees */
 }
-
 .lupa-icon {
     width: 25px;
     /* Ajusta el ancho de la imagen según tus necesidades */
@@ -99,4 +178,8 @@ body {
     /* Ajusta la altura de la imagen según tus necesidades */
     margin: auto;
     /* Ajusta el margen derecho según tus necesidades */
+}
+
+#productImage:hover {
+    cursor: pointer;
 }

@@ -8,17 +8,23 @@
         <title>MERCADO-FAKE</title>
         <link rel="stylesheet" href="./css/style.css">
         <script src="https://kit.fontawesome.com/c375b3d49e.js" crossorigin="anonymous" defer></script>
-        
         <script src="./js/app.js" defer></script>
     </head>
 
     <body>
-        <input type="search" name="search" id="search" placeholder="Buscar">
-        <button type="submit" id="searchButton">Buscar</button>
-
-        <div id="resultDiv">
-            <div id="starContainer"></div>
-        </div>
+        <nav>
+            
+            <div class="search-container">
+                <input type="search" name="search" id="search" placeholder="Buscar">
+                <button type="submit" id="searchButton">Buscar</button>
+            </div>
+        </nav>
+        <main>
+            <div class="contenedor">
+                <div id="infoDiv" class="informacion"></div>
+                <div id="resultDiv" class="container"></div>
+            </div>
+        </main>
     </body>
 
 </html>

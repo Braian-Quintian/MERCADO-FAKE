@@ -11,7 +11,7 @@ const resultDiv = document.getElementById('resultDiv');
             headers: {
                 'X-RapidAPI-Key': 'c14cddfe9cmsh28ddb67bf9544a6p1a7da5jsnce1a65e84a26',
                 'X-RapidAPI-Host': 'amazon23.p.rapidapi.com'
-            }
+            }   
         };  
 
         try {
